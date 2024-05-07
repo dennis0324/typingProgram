@@ -1,0 +1,36 @@
+
+
+.line
+{
+    display:flex;
+}
+
+.label-input
+{
+    display:flex;
+}
+
+span.SPACE, span.tab
+{
+    width:10px;
+    height:21px;
+}
+
+.intend_spacing
+{
+    margin-left:5.63px;
+}
+
+.init{
+    color:#555555;
+}
+
+.wrong
+{
+    color:var(--secondary-theme-color) !important;
+}
+
+span
+{
+    font-size:20px;
+}

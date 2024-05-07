@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lnag="kr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Typing_game</title>
+        <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="menu.css" type="text/css" rel="stylesheet">
+        <link href="buttonanimate.css" type="text/css" rel="stylesheet">
+        <link href="tpying_terms.css" type="text/css" rel="stylesheet">
+        <link rel="icon" href="favicon_1.ico">
+        <script type="text/javascript" src="/eel.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <!-- <script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script> -->
+        <script src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+        <script src="typing_term.js"></script>
+        <script src="function.js"></script>
+        <script src="main.js"></script>
+        
+
+    </head>
+    <body>
+        <div id="current_cursor_pos" class="hidden">
+            <div class="arrow-up"></div>
+            <div class="rect"><span>w</span></div>
+        </div>
+        <div id="pause_screen" class="hidden">
+            <div >
+                <div>
+                    <h1>pause</h1>
+                    <label class="caution_msg"></label>
+                    <div class="btn-conatiner-container">
+                        <div class= "btn-conatiner" style="position:relative;">
+                                <button class="btn btn-resume btn-minwidth">Resume</button>
+                        </div>
+                        <div class= "btn-conatiner" style="position:relative;"> 
+                                <button class="btn btn-exit btn-minwidth">Exit</button>
+                        </div>
+                    </div>       
+                </div>
+         
+            </div>
+
+        </div>
+        <title_div class="title">
+            <label>타자 연습</label>
+        </title_div>
+
+        <login-form class="animate_contain">
+            <div>
+                <label class="field a-field a-field_a2">
+                    <input id="id_input" class="animate_input field__input a-field__input" placeholder="nickname#0000" lang="en" required>
+                    <span class="a-field__label-wrap">
+                        <span class="a-field__label">ID</span>
+                    </span>
+                </label>
+                <label class="requirement_label reguirement_loginF_login">requierd Name</label>
+            </div>
+            <div class="btn-conatiner-container">
+                <div class= "btn-conatiner" style="position:relative;">
+                        <button class="btn register-btn btn-minwidth">sign up</button>
+
+                </div>
+                <div class= "btn-conatiner" style="position:relative;"> 
+                        <button class="btn login-btn btn-minwidth">sign in</button>
+                </div>
+            </div>
+        </login-form>
+        <register-form>
+            <div>
+                <div>
+                    <label class="title">Sign Up Account</label>
+                </div>
+                <label class=" animate_box field a-field a-field_a2">
+                    <input class="val_name field__input a-field__input" placeholder="NAME" required>
+                    <span class="a-field__label-wrap">
+                        <span class="a-field__label">NAME</span>
+                    </span>         
+                </label>
+                <label class="requirement_label requirement_name">requierd Name</label>         
+                <label class=" animate_box field a-field a-field_a2">
+                    <input class="val_id field__input a-field__input" placeholder="ID" required>
+                    <span class="a-field__label-wrap">
+                        <span class="a-field__label">ID</span>
+                    </span>   
+                </label>
+                <label class="requirement_label requirement_ID">requierd ID</label>   
+                <label class=" animate_box field a-field a-field_a2">
+                    <input type="email" id = "mail"pattern=".+@globex.com" class="val_email field__input a-field__input" placeholder="E-mail" required>
+                    <span class="a-field__label-wrap">
+                        <span class="a-field__label">E-mail</span>
+                    </span>
+                </label>
+                <label class="requirement_label requirement_email">requierd E-mail</label>
+                <div class="btn-conatiner-container">
+                        <div class= "btn-conatiner" style="position:relative;">
+                                <button class="btn cancel-btn btn-minwidth">cancel</button>
+        
+                        </div>
+                        <div class= "btn-conatiner" style="position:relative;"> 
+                                <button class="btn register-btn-set btn-minwidth">sign up</button>
+                        </div>
+                    </div>
+                <div>
+            </div>
+        </div>
+        </register-form>
+        <hashtag_teller>
+            <label class="hashtag_tell"></label>
+            <div class= "btn-conatiner" style="position:relative;"> 
+                <button id="hashtag_OK" class="btn btn-minwidth">OK!</button>
+            </div>
+        </hashtag_teller>
+        <div>
+            <nav class="overlay-menu scroll navhidden">
+                <ul id="nav">
+                    <li class="0long_active"><a href="#">긴글 연습</a></li>
+                    <li class="1short_active"><a>짧은 글 연습</a></li>
+                    <li class="4setting setting" id="setting_button" style="float:right"><a>설정</a></li> 
+                    <script>
+                        document.getElementById('setting_button').addEventListener('click', function() {
+                            setlang();
+                            eel.getidandhash();
+                            setTimeout(function(){
+                                eel.get_tasu_acc_chart(loginedName,loginedHash,'long',language);
+                                setTimeout(function(){
+                                    config.data.datasets.splice(0, 1);
+                                    config.data.datasets.splice(0, 1);
+                                    console.log(loginedName,loginedHash,language);
+                                    console.log("testing speed");
+                                    console.log("data1_list: " + String(data1_list));
+                                    if(data1_list == undefined)
+                                    {
+                                        console.log("data undefined");
+                                        for(var i = config.data.labels.length; i > 0; i--)
+                                        {
+                                            config.data.labels.splice(-1,1);
+                                        }
+                                        window.myLine.update();
+                                        return 0;
+                                    }
+                                    if(data1_list.length - config.data.labels.length > 0)
+                                    {
+                                        for(var i = config.data.labels.length; i < data1_list.length; i++)
+                                        {
+                                            config.data.labels.push(String(i));
+                                        }
+                                    } 
+                                    else if (data1_list.length - config.data.labels.length < 0)
+                                    {
+                                        for(var i = config.data.labels.length; i > data1_list.length; i--)
+                                        {
+                                            config.data.labels.splice(-1,1);
+                                        }
+                                    }
+                                    var newDataset1 = {
+                                    label: '타수',
+                                    backgroundColor: window.chartColors.blue,
+                                    borderColor: window.chartColors.blue,
+                                    fill: false,
+                                    yAxisID: 'y-axis-2',
+                                    data: data1_list
+                                };
+                                var newDataset2 = {
+                                    label: '정확도',
+                                    backgroundColor: window.chartColors.red,
+                                    borderColor: window.chartColors.red,
+                                    fill: false,
+                                    yAxisID: 'y-axis-1',
+                                    data: data2_list
+                                };
+                                config.data.datasets.push(newDataset1);
+                                config.data.datasets.push(newDataset2);
+                                window.myLine.update();
+                                }, 200);
+                            },200);
+
+                        });
+                    </script>
+                </ul>
+            </nav>
+            <div class="overlay open" id="select_menu">
+                <ul id="select_list" class="menu-num">
+                </ul>
+                <ul>
+            </div>
+            <terms_module>
+
+                    <label id="tasu"></label>
+                    <label id="accurary"></label>
+                    <label id="pageleft"></label>
+                    <div>
+
+                    </div>
+            </terms_module>
+            <div id = "setting" class="hidden">
+                <select name='my_colors' id='select_box' onchange="change()">
+                    <option value='0' selected>긴 글</option>
+                    <option value='1' >짧은 글</option>
+                </select>
+                <script>
+                    function change()
+                    {
+                        var langSelect = document.getElementById("select_box");
+     
+                        // select element에서 선택된 option의 value가 저장된다.
+                        var select_num = langSelect.options[langSelect.selectedIndex].value;
+                        console.log(select_num);
+                        if( select_num == 0)
+                        {
+                            change_chart(loginedName,loginedHash,"long",language);
+                        }
+                        else if (select_num == 1)
+                        {
+                            change_chart(loginedName,loginedHash,"short",language);
+                        }
+                        else if (select_num == 2)
+                        {
+                            change_chart(loginedName,loginedHash,"programming",language);
+                        }
+                    }
+
+                    function change_chart(name,hash,types,lang)
+                    {
+                        config.data.datasets.splice(0, 1);
+                        config.data.datasets.splice(0, 1);
+                        eel.getidandhash();
+                        setTimeout(function(){
+                            eel.get_tasu_acc_chart(name,hash,types,lang);
+                            console.log(name, hash, types, lang);
+                            setTimeout(function(){
+                                console.log("testing speed");
+                                console.log("data1_list: " + String(data1_list));
+                                if(data1_list == undefined)
+                                {
+                                    console.log("data undefined");
+                                    for(var i = config.data.labels.length; i > 0; i--)
+                                    {
+                                        config.data.labels.splice(-1,1);
+                                    }
+                                    window.myLine.update();
+                                    return 0;
+                                }
+                                if(data1_list.length - config.data.labels.length > 0)
+                                {
+                                    for(var i = config.data.labels.length; i < data1_list.length; i++)
+                                    {
+                                        config.data.labels.push(String(i));
+                                    }
+                                } 
+                                else if (data1_list.length - config.data.labels.length < 0)
+                                {
+                                    for(var i = config.data.labels.length; i > data1_list.length; i--)
+                                    {
+                                        config.data.labels.splice(-1,1);
+                                    }
+                                }
+                                console.log("testing speed");
+                                console.log(data1_list);
+                                var newDataset1 = {
+                                label: '타수',
+                                backgroundColor: window.chartColors.blue,
+                                borderColor: window.chartColors.blue,
+                                fill: false,
+                                yAxisID: 'y-axis-2',
+                                data: data1_list
+                            };
+                            var newDataset2 = {
+                                label: '정확도',
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
+                                fill: false,
+                                yAxisID: 'y-axis-1',
+                                data: data2_list
+                            };
+                            config.data.datasets.push(newDataset1);
+                            config.data.datasets.push(newDataset2);
+                            window.myLine.update();
+                            }, 200);
+                        },200);
+                    }
+                </script>
+                <div id="user-name"><span></span></div>
+                <div class= "btn-conatiner logout-contain" style="position:relative; float:left; height: 50px;">
+                        <button class="btn logout" style="cursor: pointer; ">logout</button>
+                </div>
+                <div class="switch_box box_2">
+                    Eng
+                    <input type="checkbox" class="switch_2" id="lang">
+                    한
+                </div>
+                <script>
+
+                    var testing_lang;
+                    document.getElementById("lang").addEventListener("click",function(){
+                        console.log("language: " + String(language));
+                        if (language == 0)
+                        {
+                            testing_lang = 1;
+                            console.log("testing_lang" + String(testing_lang));
+                        }
+                        if(language == 1)
+                        {
+                            testing_lang = 0;
+                            console.log("testing_lang" + String(testing_lang));
+                        }
+                        var langSelect = document.getElementById("select_box");
+                         
+                        // select element에서 선택된 option의 value가 저장된다.
+                        var select_num = langSelect.options[langSelect.selectedIndex].value;
+                        console.log(select_num);
+                        if( select_num == 0)
+                        {
+                            change_chart(loginedName,loginedHash,"long",testing_lang);
+                        }
+                        else if (select_num == 1)
+                        {
+                            change_chart(loginedName,loginedHash,"short",testing_lang);
+                        }
+                        else if (select_num == 2)
+                        {
+                            change_chart(loginedName,loginedHash,"programming",testing_lang);
+                        }
+
+                        
+                    });
+
+                    function change_chart(name,hash,types,lang)
+                    {
+                        config.data.datasets.splice(0, 1);
+                        config.data.datasets.splice(0, 1);
+                        eel.getidandhash();
+                        setTimeout(function(){
+                            eel.get_tasu_acc_chart(name,hash,types,lang);
+                            console.log(name, hash, types, lang);
+                            setTimeout(function(){
+                                console.log("testing speed");
+                                console.log("data1_list: " + String(data1_list));
+                                if(data1_list == undefined)
+                                {
+                                    console.log("data undefined");
+                                    for(var i = config.data.labels.length; i > 0; i--)
+                                    {
+                                        config.data.labels.splice(-1,1);
+                                    }
+                                    window.myLine.update();
+                                    return 0;
+                                }
+                                if(data1_list.length - config.data.labels.length > 0)
+                                {
+                                    for(var i = config.data.labels.length; i < data1_list.length; i++)
+                                    {
+                                        config.data.labels.push(String(i));
+                                    }
+                                } 
+                                else if (data1_list.length - config.data.labels.length < 0)
+                                {
+                                    for(var i = config.data.labels.length; i > data1_list.length; i--)
+                                    {
+                                        config.data.labels.splice(-1,1);
+                                    }
+                                }
+                                var newDataset1 = {
+                                label: '타수',
+                                backgroundColor: window.chartColors.blue,
+                                borderColor: window.chartColors.blue,
+                                fill: false,
+                                yAxisID: 'y-axis-2',
+                                data: data1_list
+                            };
+                            var newDataset2 = {
+                                label: '정확도',
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
+                                fill: false,
+                                yAxisID: 'y-axis-1',
+                                data: data2_list
+                            };
+                            config.data.datasets.push(newDataset1);
+                            config.data.datasets.push(newDataset2);
+                            window.myLine.update();
+                            }, 200);
+                        },200);
+                    }
+                </script>
+                <canvas id="canvas"  width="400" height="350" class=""></canvas>
+                <script>
+                </script>
+                <div id="data">
+                    <div class="long"></div>
+                    <div class="short"></div>
+                    <div class="programming"></div>
+                </div>
+            </div>              
+        </div>
+        <div>
+            <input class="hidden-text" type="text" autofocus>
+        </div>
+    </body>
+</html>

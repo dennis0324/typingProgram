@@ -1,0 +1,1 @@
+python -m eel apps.py web -c -w -F --icon=C:\Users\denni\Desktop\tpye\web\favicon_1.ico
